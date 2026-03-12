@@ -1,5 +1,7 @@
 package com.example.effectivemobiletestproject
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.InputFilter
@@ -18,6 +20,8 @@ class LoginActivity : ComponentActivity() {
         val emailEditText = findViewById<EditText>(R.id.etEmail)
         val passwordEditText = findViewById<EditText>(R.id.etPassword)
         val loginButton = findViewById<Button>(R.id.btnLogin)
+        val leftButton = findViewById<Button>(R.id.btnLeft)
+        val rightButton = findViewById<Button>(R.id.btnRight)
 
         // Запрещаем ввод кириллицы и любых символов вне стандартного email-набора
         val emailFilter = object : InputFilter {
@@ -80,6 +84,16 @@ class LoginActivity : ComponentActivity() {
             val password = passwordEditText.text.toString()
 
             // TODO: здесь будет логика входа
+        }
+
+        leftButton.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://vk.com/"))
+            startActivity(intent)
+        }
+
+        rightButton.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://ok.ru/"))
+            startActivity(intent)
         }
     }
 }
