@@ -83,7 +83,10 @@ class LoginActivity : ComponentActivity() {
             val email = emailEditText.text.toString().trim()
             val password = passwordEditText.text.toString()
 
-            // TODO: здесь будет логика входа
+            // TODO: здесь будет логика входа (пока просто переходим на MainActivity)
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
         }
 
         leftButton.setOnClickListener {
