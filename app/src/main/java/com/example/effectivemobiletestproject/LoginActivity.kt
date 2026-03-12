@@ -62,7 +62,7 @@ class LoginActivity : ComponentActivity() {
             loginButton.isEnabled = isValidEmail && isPasswordFilled
         }
 
-        // изначально кнопка неактивна
+        // изначально кнопка неактивна, затем состояние обновляем с учётом значений по умолчанию
         loginButton.isEnabled = false
 
         val watcher = object : TextWatcher {
@@ -77,6 +77,9 @@ class LoginActivity : ComponentActivity() {
 
         emailEditText.addTextChangedListener(watcher)
         passwordEditText.addTextChangedListener(watcher)
+
+        // учесть значения по умолчанию (name@name.ru / qwerty)
+        updateLoginButtonState()
 
         loginButton.setOnClickListener {
             // Здесь уже гарантированно валидный email и непустой пароль
