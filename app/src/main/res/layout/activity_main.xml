@@ -40,12 +40,23 @@
         android:id="@+id/tvSortByDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="4dp"
         android:text="@string/sort_by_added_date"
         android:textSize="12sp"
         android:textColor="@android:color/darker_gray"
         app:layout_constraintTop_toBottomOf="@id/etSearchCourses"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toStartOf="@id/ivSortDirection" />
+
+    <ImageView
+        android:id="@+id/ivSortDirection"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="@string/sort_direction_content_description"
+        android:src="@drawable/ic_sort_arrows"
+        app:layout_constraintBottom_toBottomOf="@id/tvSortByDate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvSortByDate" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCourses"
