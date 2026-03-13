@@ -10,7 +10,10 @@
         android:id="@+id/etSearchCourses"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
         android:drawableStart="@drawable/ic_search"
         android:drawablePadding="8dp"
         android:hint="@string/search_courses_hint"
@@ -18,6 +21,19 @@
         android:inputType="text"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnFilterCourses" />
+
+    <ImageButton
+        android:id="@+id/btnFilterCourses"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="16dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/filter_courses_content_description"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_filter"
+        app:layout_constraintTop_toTopOf="@id/etSearchCourses"
+        app:layout_constraintBottom_toBottomOf="@id/etSearchCourses"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
