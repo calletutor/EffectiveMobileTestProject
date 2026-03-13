@@ -36,13 +36,24 @@
         app:layout_constraintBottom_toBottomOf="@id/etSearchCourses"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <TextView
+        android:id="@+id/tvSortByDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="@string/sort_by_added_date"
+        android:textSize="12sp"
+        android:textColor="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/etSearchCourses"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCourses"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:padding="16dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/etSearchCourses"
+        app:layout_constraintTop_toBottomOf="@id/tvSortByDate"
         app:layout_constraintBottom_toTopOf="@id/bottomBar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

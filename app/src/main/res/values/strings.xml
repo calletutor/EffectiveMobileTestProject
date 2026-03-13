@@ -2,4 +2,5 @@
     <string name="app_name">EffectiveMobileTestProject</string>
     <string name="search_courses_hint">Поиск по курсам</string>
     <string name="filter_courses_content_description">Фильтр курсов</string>
+    <string name="sort_by_added_date">По дате добавления</string>
 </resources>
