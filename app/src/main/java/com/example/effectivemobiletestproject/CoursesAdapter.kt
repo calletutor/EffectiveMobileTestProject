@@ -1,5 +1,6 @@
 package com.example.effectivemobiletestproject
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,6 +40,18 @@ class CoursesAdapter(
             tvDescription.text = item.text
             tvPrice.text = item.price
             tvRate.text = item.rate
+
+            itemView.setOnClickListener {
+                val context = itemView.context
+                val intent = Intent(context, CourseActivity::class.java).apply {
+                    putExtra(CourseActivity.EXTRA_TITLE, item.title)
+                    putExtra(CourseActivity.EXTRA_DESCRIPTION, item.text)
+                    putExtra(CourseActivity.EXTRA_PRICE, item.price)
+                    putExtra(CourseActivity.EXTRA_RATE, item.rate)
+                    putExtra(CourseActivity.EXTRA_START_DATE, item.startDate)
+                }
+                context.startActivity(intent)
+            }
         }
     }
 }

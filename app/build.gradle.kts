@@ -58,6 +58,7 @@ dependencies {
     implementation(libs.adapter.delegates)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.material)
+    implementation(libs.constraintlayout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
