@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">EffectiveMobileTestProject</string>
+    <string name="search_courses_hint">Поиск по курсам</string>
 </resources>
