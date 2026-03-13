@@ -3,7 +3,11 @@ package com.example.effectivemobiletestproject
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.RecyclerView
+import com.example.effectivemobiletestproject.data.remote.ApiClient
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +34,22 @@ class MainActivity : ComponentActivity() {
                 }
 
                 else -> false
+            }
+        }
+
+        // Настройка списка курсов
+        val recyclerView = findViewById<RecyclerView>(R.id.rvCourses)
+        val adapter = CoursesAdapter()
+        recyclerView.adapter = adapter
+
+        // Загрузка данных из API
+        lifecycleScope.launch {
+            try {
+                val courses = ApiClient.coursesRepository.getCourses()
+                adapter.submitList(courses)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                // при желании можно показать ошибку пользователю
             }
         }
     }
