@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.EffectiveMobileTestProject" parent="android:Theme.Material.Light.NoActionBar" />
+    <!-- Переводим тему на MaterialComponents, совместимую с BottomNavigationView -->
+    <style name="Theme.EffectiveMobileTestProject" parent="Theme.MaterialComponents.DayNight.NoActionBar" />
+
 </resources>

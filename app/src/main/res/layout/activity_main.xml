@@ -17,52 +17,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <LinearLayout
+    <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:background="@android:color/darker_gray"
+        android:background="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <TextView
-            android:id="@+id/tabHome"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Главное"
-            android:drawableTop="@drawable/ic_home"
-            android:drawablePadding="4dp"
-            android:textColor="@android:color/white" />
-
-        <TextView
-            android:id="@+id/tabFavorites"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Избранное"
-            android:drawableTop="@drawable/ic_favorite"
-            android:drawablePadding="4dp"
-            android:textColor="@android:color/white" />
-
-        <TextView
-            android:id="@+id/tabAccount"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Аккаунт"
-            android:drawableTop="@drawable/ic_account"
-            android:drawablePadding="4dp"
-            android:textColor="@android:color/white" />
-
-    </LinearLayout>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:menu="@menu/bottom_nav_menu"
+        app:itemIconTint="@android:color/black"
+        app:itemTextColor="@android:color/black" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
