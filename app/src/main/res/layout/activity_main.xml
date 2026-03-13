@@ -11,6 +11,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:drawableStart="@drawable/ic_search"
+        android:drawablePadding="8dp"
         android:hint="@string/search_courses_hint"
         android:imeOptions="actionSearch"
         android:inputType="text"
