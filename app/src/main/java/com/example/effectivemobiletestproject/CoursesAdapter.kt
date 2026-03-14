@@ -48,6 +48,7 @@ class CoursesAdapter(
                     putExtra(CourseActivity.EXTRA_DESCRIPTION, item.text)
                     putExtra(CourseActivity.EXTRA_PRICE, item.price)
                     putExtra(CourseActivity.EXTRA_RATE, item.rate)
+//                    putExtra(CourseActivity.EXTRA_START_DATE, item.publishDate)
                     putExtra(CourseActivity.EXTRA_START_DATE, item.startDate)
                 }
                 context.startActivity(intent)
