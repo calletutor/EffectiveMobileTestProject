@@ -4,6 +4,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.effectivemobiletestproject.core.network.dto.CourseDto
@@ -31,12 +32,15 @@ class CoursesAdapter(
     override fun getItemCount(): Int = items.size
 
     class CourseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val ivCourseImage: ImageView = itemView.findViewById(R.id.ivCourseImage)
         private val tvTitle: TextView = itemView.findViewById(R.id.tvTitle)
         private val tvDescription: TextView = itemView.findViewById(R.id.tvDescription)
         private val tvPrice: TextView = itemView.findViewById(R.id.tvPrice)
         private val tvRate: TextView = itemView.findViewById(R.id.tvRate)
 
         fun bind(item: CourseDto) {
+//            ivCourseImage.setImageResource(com.example.effectivemobiletestproject.core.ui.R.drawable.placeholder)
+//            ivCourseImage.setImageResource(R.drawable.placeholder_course)
             tvTitle.text = item.title
             tvDescription.text = item.text
             tvPrice.text = item.price
