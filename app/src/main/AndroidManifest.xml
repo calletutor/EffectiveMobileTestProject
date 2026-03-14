@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EffectiveMobileTestProject">
         <activity
-            android:name=".LoginActivity"
+            android:name="com.example.effectivemobiletestproject.feature.auth.LoginActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.EffectiveMobileTestProject">
@@ -26,22 +26,22 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.effectivemobiletestproject.feature.home.MainActivity"
             android:exported="false"
             android:label="@string/app_name"
             android:theme="@style/Theme.EffectiveMobileTestProject" />
         <activity
-            android:name=".CourseActivity"
+            android:name="com.example.effectivemobiletestproject.feature.course.CourseActivity"
             android:exported="false"
             android:label="@string/app_name"
             android:theme="@style/Theme.EffectiveMobileTestProject" />
         <activity
-            android:name=".FavoritesActivity"
+            android:name="com.example.effectivemobiletestproject.feature.favorites.FavoritesActivity"
             android:exported="false"
             android:label="@string/app_name"
             android:theme="@style/Theme.EffectiveMobileTestProject" />
         <activity
-            android:name=".AccountActivity"
+            android:name="com.example.effectivemobiletestproject.feature.account.AccountActivity"
             android:exported="false"
             android:label="@string/app_name"
             android:theme="@style/Theme.EffectiveMobileTestProject" />

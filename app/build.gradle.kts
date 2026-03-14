@@ -5,9 +5,7 @@ plugins {
 
 android {
     namespace = "com.example.effectivemobiletestproject"
-    compileSdk {
-        version = release(36)
-    }
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.example.effectivemobiletestproject"
@@ -38,27 +36,30 @@ android {
 }
 
 dependencies {
+    // Core modules
+    implementation(project(":core:network"))
+    implementation(project(":core:ui"))
+    
+    // Feature modules
+    implementation(project(":feature:auth"))
+    implementation(project(":feature:home"))
+    implementation(project(":feature:course"))
+    implementation(project(":feature:favorites"))
+    implementation(project(":feature:account"))
+    
+    // AndroidX dependencies
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
+    
+    // Compose
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
-    implementation(libs.retrofit)
-    implementation(libs.retrofit.converter.gson)
-    implementation(libs.okhttp.logging.interceptor)
-    implementation(libs.gson)
-    implementation(libs.coroutines.core)
-    implementation(libs.coroutines.android)
-    implementation(libs.koin.core)
-    implementation(libs.koin.android)
-    implementation(libs.koin.androidx.compose)
-    implementation(libs.adapter.delegates)
-    implementation(libs.androidx.constraintlayout)
-    implementation(libs.material)
-    implementation(libs.constraintlayout)
+    
+    // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
