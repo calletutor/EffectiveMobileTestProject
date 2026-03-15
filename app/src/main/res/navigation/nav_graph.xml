@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.effectivemobiletestproject.feature.auth.LoginFragment"
+        android:label="Вход"
+        tools:layout="@layout/activity_login" />
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.effectivemobiletestproject.feature.home.HomeFragment"
+        android:label="Главное"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/courseFragment"
+        android:name="com.example.effectivemobiletestproject.feature.course.CourseFragment"
+        android:label="Курс">
+        <argument
+            android:name="title"
+            app:argType="string"
+            android:defaultValue="" />
+        <argument
+            android:name="description"
+            app:argType="string"
+            android:defaultValue="" />
+        <argument
+            android:name="price"
+            app:argType="string"
+            android:defaultValue="" />
+        <argument
+            android:name="rate"
+            app:argType="string"
+            android:defaultValue="" />
+        <argument
+            android:name="startDate"
+            app:argType="string"
+            android:defaultValue="" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.example.effectivemobiletestproject.feature.favorites.FavoritesFragment"
+        android:label="Избранное"
+        tools:layout="@layout/fragment_favorites" />
+
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.example.effectivemobiletestproject.feature.account.AccountFragment"
+        android:label="Аккаунт"
+        tools:layout="@layout/fragment_account" />
+</navigation>

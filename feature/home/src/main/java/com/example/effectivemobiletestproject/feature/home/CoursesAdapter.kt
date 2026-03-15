@@ -1,6 +1,5 @@
 package com.example.effectivemobiletestproject.feature.home
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,10 +7,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.effectivemobiletestproject.core.network.dto.CourseDto
-import com.example.effectivemobiletestproject.feature.course.CourseActivity
 
 class CoursesAdapter(
-    private var items: List<CourseDto> = emptyList()
+    private var items: List<CourseDto> = emptyList(),
+    private val onCourseClick: (title: String, description: String, price: String, rate: String, startDate: String) -> Unit = { _, _, _, _, _ -> }
 ) : RecyclerView.Adapter<CoursesAdapter.CourseViewHolder>() {
 
     fun submitList(newItems: List<CourseDto>) {
@@ -31,7 +30,7 @@ class CoursesAdapter(
 
     override fun getItemCount(): Int = items.size
 
-    class CourseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class CourseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val ivCourseImage: ImageView = itemView.findViewById(R.id.ivCourseImage)
         private val tvTitle: TextView = itemView.findViewById(R.id.tvTitle)
         private val tvDescription: TextView = itemView.findViewById(R.id.tvDescription)
@@ -39,23 +38,13 @@ class CoursesAdapter(
         private val tvRate: TextView = itemView.findViewById(R.id.tvRate)
 
         fun bind(item: CourseDto) {
-//            ivCourseImage.setImageResource(com.example.effectivemobiletestproject.core.ui.R.drawable.placeholder)
-//            ivCourseImage.setImageResource(R.drawable.placeholder_course)
             tvTitle.text = item.title
             tvDescription.text = item.text
             tvPrice.text = item.price
             tvRate.text = item.rate
 
             itemView.setOnClickListener {
-                val context = itemView.context
-                val intent = Intent(context, CourseActivity::class.java).apply {
-                    putExtra(CourseActivity.EXTRA_TITLE, item.title)
-                    putExtra(CourseActivity.EXTRA_DESCRIPTION, item.text)
-                    putExtra(CourseActivity.EXTRA_PRICE, item.price)
-                    putExtra(CourseActivity.EXTRA_RATE, item.rate)
-                    putExtra(CourseActivity.EXTRA_START_DATE, item.startDate)
-                }
-                context.startActivity(intent)
+                onCourseClick(item.title, item.text, item.price, item.rate, item.startDate)
             }
         }
     }

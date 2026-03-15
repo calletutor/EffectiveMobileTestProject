@@ -32,8 +32,10 @@ android {
     }
     buildFeatures {
         compose = true
+        viewBinding = true
     }
 }
+
 
 dependencies {
     // Core modules
@@ -49,8 +51,12 @@ dependencies {
     
     // AndroidX dependencies
     implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.material)
     
     // Compose
     implementation(platform(libs.androidx.compose.bom))
