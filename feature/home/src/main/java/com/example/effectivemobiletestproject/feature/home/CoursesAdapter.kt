@@ -37,6 +37,7 @@ class CoursesAdapter(
         private val tvPrice: TextView = itemView.findViewById(R.id.tvPrice)
         private val tvRate: TextView = itemView.findViewById(R.id.tvRate)
         private val tvRateOverlay: TextView = itemView.findViewById(R.id.tvRateOverlay)
+        private val tvDateOverlay: TextView = itemView.findViewById(R.id.tvDateOverlay)
 
         fun bind(item: CourseDto) {
             tvTitle.text = item.title
@@ -44,6 +45,7 @@ class CoursesAdapter(
             tvPrice.text = item.price
             tvRate.text = item.rate
             tvRateOverlay.text = item.rate
+            tvDateOverlay.text = item.startDate
 
             itemView.setOnClickListener {
                 onCourseClick(item.title, item.text, item.price, item.rate, item.startDate)
