@@ -6,16 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
-import com.example.effectivemobiletestproject.core.network.ApiClient
-import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
     private var navigateToCourseListener: OnNavigateToCourseListener? = null
-    private var courseItems: List<CourseItem> = emptyList()
     private lateinit var adapter: CoursesAdapter
+    private val viewModel: HomeViewModel by viewModels()
 
     override fun onAttach(context: android.content.Context) {
         super.onAttach(context)
@@ -42,32 +41,24 @@ class HomeFragment : Fragment() {
         adapter = CoursesAdapter(
             onCourseClick = { title, description, price, rate, startDate ->
                 navigateToCourseListener?.onCourseSelected(title, description, price, rate, startDate)
+            },
+            onBookmarkToggle = { courseId, _ ->
+                viewModel.toggleBookmark(courseId)
             }
         )
         recyclerView.adapter = adapter
 
         view.findViewById<ImageView>(R.id.ivSortDirection).setOnClickListener {
-            if (courseItems.isNotEmpty()) {
-                val sorted = courseItems.sortedByDescending { it.publishDate }
-                adapter.submitList(sorted)
-            }
+            viewModel.sortByPublishDateDesc()
         }
 
-        lifecycleScope.launch {
-            try {
-                val loadedCourses = ApiClient.coursesRepository.getCourses()
-                courseItems = loadedCourses.map { course ->
-                    CourseItem(
-                        course = course,
-                        isSelected = false
-                    )
-                }
-                
-                adapter.submitList(courseItems)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
+        // Подписываемся на данные из ViewModel
+        viewModel.courses.observe(viewLifecycleOwner, Observer { items ->
+            adapter.submitList(items)
+        })
+
+        // Стартовая загрузка данных
+        viewModel.loadCourses()
     }
 
     interface OnNavigateToCourseListener {
