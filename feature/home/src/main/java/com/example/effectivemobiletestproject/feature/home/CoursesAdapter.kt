@@ -72,10 +72,8 @@ class CoursesAdapter(
                 if (position == RecyclerView.NO_POSITION) return@OnClickListener
 
                 val current = items[position]
-                val newIsSelected = !current.isSelected
-                items[position] = current.copy(isSelected = newIsSelected)
-                applyBookmarkState(newIsSelected)
-                onBookmarkToggle(current.id, newIsSelected)
+                // Только вызываем колбэк, состояние будет обновлено через ViewModel
+                onBookmarkToggle(current.id, !current.isSelected)
             }
 
             cardBookmark.setOnClickListener(toggleListener)

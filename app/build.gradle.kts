@@ -76,6 +76,9 @@ dependencies {
     // Room compiler для генерации кода (используем annotationProcessor)
     annotationProcessor(libs.room.compiler)
     
+    // Koin для DI
+    implementation(libs.koin.android)
+    
     // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

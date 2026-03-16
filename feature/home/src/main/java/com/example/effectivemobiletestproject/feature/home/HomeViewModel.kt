@@ -4,14 +4,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.effectivemobiletestproject.core.network.ApiClient
+import com.example.effectivemobiletestproject.core.network.repository.CoursesRepository
 import kotlinx.coroutines.launch
 
 /**
  * ViewModel для экрана списка курсов.
  * Инкапсулирует загрузку данных и бизнес-логику (MVVM).
  */
-class HomeViewModel : ViewModel() {
+class HomeViewModel(
+    private val coursesRepository: CoursesRepository
+) : ViewModel() {
 
     private val _courses = MutableLiveData<List<CourseItem>>(emptyList())
     val courses: LiveData<List<CourseItem>> = _courses
@@ -24,7 +26,7 @@ class HomeViewModel : ViewModel() {
 
         viewModelScope.launch {
             try {
-                val loadedCourses = ApiClient.coursesRepository.getCourses()
+                val loadedCourses = coursesRepository.getCourses()
                 val items = loadedCourses.map { course ->
                     CourseItem(course = course, isSelected = false)
                 }
