@@ -1,6 +1,5 @@
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.ksp)
 }
 
 android {
@@ -21,8 +20,7 @@ dependencies {
     implementation(project(":core:network"))
     implementation(libs.coroutines.core)
 
-    // Room
-    implementation(libs.room.runtime)
-    implementation(libs.room.ktx)
-    ksp(libs.room.compiler)
+    // Room (экспортируем для использования в app модуле)
+    api(libs.room.runtime)
+    api(libs.room.ktx)
 }

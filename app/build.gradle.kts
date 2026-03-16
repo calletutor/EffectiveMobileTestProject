@@ -30,6 +30,13 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+    defaultConfig {
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += mapOf("room.schemaLocation" to "$projectDir/schemas")
+            }
+        }
+    }
     buildFeatures {
         compose = true
         viewBinding = true
@@ -41,6 +48,7 @@ dependencies {
     // Core modules
     implementation(project(":core:network"))
     implementation(project(":core:ui"))
+    implementation(project(":core:data"))
     
     // Feature modules
     implementation(project(":feature:auth"))
@@ -64,6 +72,9 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
+    
+    // Room compiler для генерации кода (используем annotationProcessor)
+    annotationProcessor(libs.room.compiler)
     
     // Testing
     testImplementation(libs.junit)

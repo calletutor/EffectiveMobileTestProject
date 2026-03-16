@@ -1,21 +1,32 @@
 package com.example.effectivemobiletestproject.feature.home
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.effectivemobiletestproject.core.network.dto.CourseDto
 
 class CoursesAdapter(
-    private var items: List<CourseDto> = emptyList(),
-    private val onCourseClick: (title: String, description: String, price: String, rate: String, startDate: String) -> Unit = { _, _, _, _, _ -> }
+    private var items: MutableList<CourseItem> = mutableListOf(),
+    private val onCourseClick: (title: String, description: String, price: String, rate: String, startDate: String) -> Unit = { _, _, _, _, _ -> },
+    private val onBookmarkToggle: (courseId: Int, isSelected: Boolean) -> Unit = { _, _ -> }
 ) : RecyclerView.Adapter<CoursesAdapter.CourseViewHolder>() {
 
-    fun submitList(newItems: List<CourseDto>) {
-        items = newItems
+    fun submitList(newItems: List<CourseItem>) {
+        items = newItems.toMutableList()
         notifyDataSetChanged()
+    }
+
+    fun updateItemSelection(courseId: Int, isSelected: Boolean) {
+        val index = items.indexOfFirst { it.id == courseId }
+        if (index != -1) {
+            val item = items[index]
+            items[index] = item.copy(isSelected = isSelected)
+            notifyItemChanged(index)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CourseViewHolder {
@@ -38,8 +49,10 @@ class CoursesAdapter(
         private val tvRate: TextView = itemView.findViewById(R.id.tvRate)
         private val tvRateOverlay: TextView = itemView.findViewById(R.id.tvRateOverlay)
         private val tvDateOverlay: TextView = itemView.findViewById(R.id.tvDateOverlay)
+        private val cardBookmark: CardView = itemView.findViewById(R.id.cardBookmark)
+        private val ivBookmark: ImageView = itemView.findViewById(R.id.ivBookmark)
 
-        fun bind(item: CourseDto) {
+        fun bind(item: CourseItem) {
             tvTitle.text = item.title
             tvDescription.text = item.text
             tvPrice.text = item.price
@@ -47,11 +60,38 @@ class CoursesAdapter(
             tvRateOverlay.text = item.rate
             tvDateOverlay.text = item.startDate
 
+            // состояние закладки в зависимости от isSelected
+            applyBookmarkState(item.isSelected)
+
             itemView.setOnClickListener {
                 onCourseClick(item.title, item.text, item.price, item.rate, item.startDate)
+            }
+
+            val toggleListener = View.OnClickListener {
+                val position = adapterPosition
+                if (position == RecyclerView.NO_POSITION) return@OnClickListener
+
+                val current = items[position]
+                val newIsSelected = !current.isSelected
+                items[position] = current.copy(isSelected = newIsSelected)
+                applyBookmarkState(newIsSelected)
+                onBookmarkToggle(current.id, newIsSelected)
+            }
+
+            cardBookmark.setOnClickListener(toggleListener)
+            ivBookmark.setOnClickListener(toggleListener)
+        }
+
+        private fun applyBookmarkState(isSelected: Boolean) {
+            // меняем цвет иконки и фона в зависимости от выбранности
+            if (isSelected) {
+                cardBookmark.setCardBackgroundColor(Color.parseColor("#FFFFC107")) // жёлтый
+                ivBookmark.setColorFilter(Color.BLACK)
+            } else {
+                cardBookmark.setCardBackgroundColor(Color.parseColor("#80000000")) // полупрозрачный чёрный
+                ivBookmark.setColorFilter(Color.WHITE)
             }
         }
     }
 }
-
 

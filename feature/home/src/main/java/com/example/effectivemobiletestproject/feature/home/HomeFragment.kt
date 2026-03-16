@@ -9,13 +9,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.example.effectivemobiletestproject.core.network.ApiClient
-import com.example.effectivemobiletestproject.core.network.dto.CourseDto
 import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
     private var navigateToCourseListener: OnNavigateToCourseListener? = null
-    private var courses: List<CourseDto> = emptyList()
+    private var courseItems: List<CourseItem> = emptyList()
+    private lateinit var adapter: CoursesAdapter
 
     override fun onAttach(context: android.content.Context) {
         super.onAttach(context)
@@ -38,7 +38,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: android.view.View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val recyclerView = view.findViewById<RecyclerView>(R.id.rvCourses)
-        val adapter = CoursesAdapter(
+
+        adapter = CoursesAdapter(
             onCourseClick = { title, description, price, rate, startDate ->
                 navigateToCourseListener?.onCourseSelected(title, description, price, rate, startDate)
             }
@@ -46,8 +47,8 @@ class HomeFragment : Fragment() {
         recyclerView.adapter = adapter
 
         view.findViewById<ImageView>(R.id.ivSortDirection).setOnClickListener {
-            if (courses.isNotEmpty()) {
-                val sorted = courses.sortedByDescending { it.publishDate }
+            if (courseItems.isNotEmpty()) {
+                val sorted = courseItems.sortedByDescending { it.publishDate }
                 adapter.submitList(sorted)
             }
         }
@@ -55,8 +56,14 @@ class HomeFragment : Fragment() {
         lifecycleScope.launch {
             try {
                 val loadedCourses = ApiClient.coursesRepository.getCourses()
-                courses = loadedCourses
-                adapter.submitList(loadedCourses)
+                courseItems = loadedCourses.map { course ->
+                    CourseItem(
+                        course = course,
+                        isSelected = false
+                    )
+                }
+                
+                adapter.submitList(courseItems)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
