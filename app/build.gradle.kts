@@ -73,8 +73,7 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
     
-    // Room compiler для генерации кода (используем annotationProcessor)
-    annotationProcessor(libs.room.compiler)
+    // Room (через core:data)
     
     // Koin для DI
     implementation(libs.koin.android)

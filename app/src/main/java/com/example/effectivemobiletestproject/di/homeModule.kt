@@ -9,7 +9,7 @@ import org.koin.dsl.module
  */
 val homeModule = module {
     
-    // ViewModel
-    viewModel { HomeViewModel(get()) }
+    // ViewModel с инъекцией CoursesRepository и SelectedCourseRepository
+    viewModel { HomeViewModel(get(), get()) }
 }
 
