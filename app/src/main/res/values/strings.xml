@@ -4,4 +4,5 @@
     <string name="filter_courses_content_description">Фильтр курсов</string>
     <string name="sort_by_added_date">По дате добавления</string>
     <string name="sort_direction_content_description">Направление сортировки</string>
+    <string name="back">Назад</string>
 </resources>
