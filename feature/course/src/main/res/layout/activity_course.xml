@@ -32,15 +32,17 @@
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <!-- Кнопка назад в левой части плейсхолдера -->
+            <!--android:background="@drawable/bg_overlay_rounded"-->
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/btnBack"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="@drawable/bg_overlay_rounded"
                 android:padding="8dp"
-                android:src="@drawable/ic_arrow_back"
+                android:background="@android:color/transparent"
+                android:foreground="@null"
+                android:src="@drawable/ic_button_back"
                 android:contentDescription="@string/back"
-                app:tint="@color/white"
+                app:tint="@android:color/black"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="parent"
