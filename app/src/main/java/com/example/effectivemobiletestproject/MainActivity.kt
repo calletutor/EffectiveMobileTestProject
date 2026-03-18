@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun onCourseSelected(
+        courseId: Int,
         title: String,
         description: String,
         price: String,
@@ -46,6 +47,7 @@ class MainActivity : AppCompatActivity(),
         startDate: String
     ) {
         val args = Bundle().apply {
+            putInt("courseId", courseId)
             putString("title", title)
             putString("description", description)
             putString("price", price)

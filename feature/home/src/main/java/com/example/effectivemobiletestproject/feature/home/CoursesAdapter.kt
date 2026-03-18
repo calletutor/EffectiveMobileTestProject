@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class CoursesAdapter(
     private var items: MutableList<CourseItem> = mutableListOf(),
-    private val onCourseClick: (title: String, description: String, price: String, rate: String, startDate: String) -> Unit = { _, _, _, _, _ -> },
+    private val onCourseClick: (courseId: Int, title: String, description: String, price: String, rate: String, startDate: String) -> Unit = { _, _, _, _, _, _ -> },
     private val onBookmarkToggle: (courseId: Int, isSelected: Boolean) -> Unit = { _, _ -> }
 ) : RecyclerView.Adapter<CoursesAdapter.CourseViewHolder>() {
 
@@ -64,7 +64,7 @@ class CoursesAdapter(
             applyBookmarkState(item.isSelected)
 
             itemView.setOnClickListener {
-                onCourseClick(item.title, item.text, item.price, item.rate, item.startDate)
+                onCourseClick(item.id, item.title, item.text, item.price, item.rate, item.startDate)
             }
 
             val toggleListener = View.OnClickListener {

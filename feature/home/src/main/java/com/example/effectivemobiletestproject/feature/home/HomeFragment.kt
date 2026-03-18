@@ -39,8 +39,8 @@ class HomeFragment : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.rvCourses)
 
         adapter = CoursesAdapter(
-            onCourseClick = { title, description, price, rate, startDate ->
-                navigateToCourseListener?.onCourseSelected(title, description, price, rate, startDate)
+            onCourseClick = { courseId, title, description, price, rate, startDate ->
+                navigateToCourseListener?.onCourseSelected(courseId, title, description, price, rate, startDate)
             },
             onBookmarkToggle = { courseId, _ ->
                 viewModel.toggleBookmark(courseId)
@@ -63,6 +63,7 @@ class HomeFragment : Fragment() {
 
     interface OnNavigateToCourseListener {
         fun onCourseSelected(
+            courseId: Int,
             title: String,
             description: String,
             price: String,

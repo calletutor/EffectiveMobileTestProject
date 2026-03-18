@@ -56,6 +56,23 @@ class SelectedCourseRepository(context: Context) {
             db.delete("selected_courses", "courseId = ?", arrayOf(courseId.toString()))
         }
     }
+
+    suspend fun isCourseSelected(courseId: Int): Boolean {
+        return withContext(Dispatchers.IO) {
+            val db = dbHelper.readableDatabase
+            val cursor = db.query(
+                "selected_courses",
+                arrayOf("courseId"),
+                "courseId = ?",
+                arrayOf(courseId.toString()),
+                null,
+                null,
+                null
+            )
+            val selected = cursor.use { it.count > 0 }
+            selected
+        }
+    }
 }
 
 

@@ -22,6 +22,10 @@
         android:name="com.example.effectivemobiletestproject.feature.course.CourseFragment"
         android:label="Курс">
         <argument
+            android:name="courseId"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
             android:name="title"
             app:argType="string"
             android:defaultValue="" />
