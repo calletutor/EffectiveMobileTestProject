@@ -32,7 +32,7 @@
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <!-- Кнопка назад в левой части плейсхолдера -->
-            <ImageButton
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/btnBack"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -40,7 +40,7 @@
                 android:padding="8dp"
                 android:src="@drawable/ic_arrow_back"
                 android:contentDescription="@string/back"
-                android:tint="@android:color/white"
+                app:tint="@color/white"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -59,13 +59,13 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivBookmarkDetail"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:layout_gravity="center"
                     android:src="@drawable/bookmark"
-                    android:tint="@android:color/white"
+                    app:tint="@color/white"
                     android:contentDescription="@null" />
 
             </com.google.android.material.card.MaterialCardView>
