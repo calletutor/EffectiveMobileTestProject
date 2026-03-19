@@ -60,7 +60,6 @@ class CoursesAdapter(
             tvRateOverlay.text = item.rate
             tvDateOverlay.text = item.startDate
 
-            // состояние закладки в зависимости от isSelected
             applyBookmarkState(item.isSelected)
 
             itemView.setOnClickListener {
@@ -72,7 +71,6 @@ class CoursesAdapter(
                 if (position == RecyclerView.NO_POSITION) return@OnClickListener
 
                 val current = items[position]
-                // Только вызываем колбэк, состояние будет обновлено через ViewModel
                 onBookmarkToggle(current.id, !current.isSelected)
             }
 
@@ -81,7 +79,6 @@ class CoursesAdapter(
         }
 
         private fun applyBookmarkState(isSelected: Boolean) {
-            // меняем цвет иконки и фона в зависимости от выбранности
             if (isSelected) {
                 cardBookmark.setCardBackgroundColor(Color.parseColor("#FFFFC107")) // жёлтый
                 ivBookmark.setColorFilter(Color.BLACK)
@@ -92,4 +89,3 @@ class CoursesAdapter(
         }
     }
 }
-

@@ -45,19 +45,16 @@ android {
 
 
 dependencies {
-    // Core modules
     implementation(project(":core:network"))
     implementation(project(":core:ui"))
     implementation(project(":core:data"))
     
-    // Feature modules
     implementation(project(":feature:auth"))
     implementation(project(":feature:home"))
     implementation(project(":feature:course"))
     implementation(project(":feature:favorites"))
     implementation(project(":feature:account"))
     
-    // AndroidX dependencies
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -66,19 +63,14 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.material)
     
-    // Compose
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
-    
-    // Room (через core:data)
-    
-    // Koin для DI
+
     implementation(libs.koin.android)
     
-    // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

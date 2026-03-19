@@ -20,7 +20,6 @@ dependencies {
     implementation(project(":core:network"))
     implementation(libs.coroutines.core)
 
-    // Room (экспортируем для использования в app модуле)
     api(libs.room.runtime)
     api(libs.room.ktx)
 }

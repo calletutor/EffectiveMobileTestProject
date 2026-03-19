@@ -52,12 +52,10 @@ class HomeFragment : Fragment() {
             viewModel.sortByPublishDateDesc()
         }
 
-        // Подписываемся на данные из ViewModel
         viewModel.courses.observe(viewLifecycleOwner, Observer { items ->
             adapter.submitList(items)
         })
 
-        // Стартовая загрузка данных
         viewModel.loadCourses()
     }
 

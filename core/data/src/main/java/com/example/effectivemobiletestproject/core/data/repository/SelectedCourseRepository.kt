@@ -8,10 +8,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
 
-/**
- * Репозиторий для работы с выбранными курсами через SQLite напрямую.
- * Находится в core:data, чтобы быть доступным из feature-модулей.
- */
 class SelectedCourseRepository(context: Context) {
 
     private val dbHelper = object : SQLiteOpenHelper(context, "selected_courses.db", null, 1) {
@@ -26,7 +22,6 @@ class SelectedCourseRepository(context: Context) {
     }
 
     fun getAllSelectedCourseIds(): Flow<List<Int>> = flow {
-        // читаем из БД на IO, а emit делаем в контексте коллектора (Main)
         val ids = withContext(Dispatchers.IO) {
             val db = dbHelper.readableDatabase
             val cursor = db.query("selected_courses", arrayOf("courseId"), null, null, null, null, null)
@@ -74,5 +69,3 @@ class SelectedCourseRepository(context: Context) {
         }
     }
 }
-
-

@@ -63,13 +63,11 @@ class CourseFragment : Fragment() {
             requireActivity().onBackPressedDispatcher.onBackPressed()
         }
 
-        // Начальная установка состояния закладки из БД
         viewLifecycleOwner.lifecycleScope.launch {
             isSelected = selectedCourseRepository.isCourseSelected(courseId)
             applyBookmarkState(isSelected)
         }
 
-        // Переключение закладки и синхронизация с БД
         cardBookmark.setOnClickListener {
             viewLifecycleOwner.lifecycleScope.launch {
                 if (isSelected) {

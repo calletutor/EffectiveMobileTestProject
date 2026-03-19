@@ -23,7 +23,6 @@ class LoginActivity : ComponentActivity() {
         val leftButton = findViewById<Button>(R.id.btnLeft)
         val rightButton = findViewById<Button>(R.id.btnRight)
 
-        // Запрещаем ввод кириллицы и любых символов вне стандартного email-набора
         val emailFilter = object : InputFilter {
             private val allowedRegex = Regex("[a-zA-Z0-9@._\\-]+")
 
@@ -37,20 +36,19 @@ class LoginActivity : ComponentActivity() {
             ): CharSequence? {
                 val newText = source.subSequence(start, end)
                 return if (newText.isEmpty()) {
-                    null // удаление / backspace
+                    null
                 } else if (allowedRegex.matches(newText)) {
-                    null // всё ок, пропускаем как есть
+                    null
                 } else {
-                    "" // блокируем недопустимые символы (в т.ч. кириллицу)
+                    ""
                 }
             }
         }
 
         emailEditText.filters = arrayOf(emailFilter)
 
-        // Маска email и блокировка кнопки, если данные невалидны
         val emailPattern =
-            Regex("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$") // текст@текст.текст
+            Regex("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")
 
         fun updateLoginButtonState() {
             val email = emailEditText.text.toString().trim()
@@ -62,7 +60,6 @@ class LoginActivity : ComponentActivity() {
             loginButton.isEnabled = isValidEmail && isPasswordFilled
         }
 
-        // изначально кнопка неактивна, затем состояние обновляем с учётом значений по умолчанию
         loginButton.isEnabled = false
 
         val watcher = object : TextWatcher {
@@ -78,15 +75,12 @@ class LoginActivity : ComponentActivity() {
         emailEditText.addTextChangedListener(watcher)
         passwordEditText.addTextChangedListener(watcher)
 
-        // учесть значения по умолчанию (name@name.ru / qwerty)
         updateLoginButtonState()
 
         loginButton.setOnClickListener {
-            // Здесь уже гарантированно валидный email и непустой пароль
             val email = emailEditText.text.toString().trim()
             val password = passwordEditText.text.toString()
 
-            // TODO: здесь будет логика входа (пока просто переходим на MainActivity)
             val intent = Intent().setClassName(this, "com.example.effectivemobiletestproject.feature.home.MainActivity")
             startActivity(intent)
             finish()

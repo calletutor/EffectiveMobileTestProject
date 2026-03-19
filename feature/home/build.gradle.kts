@@ -29,8 +29,5 @@ dependencies {
     implementation(libs.material)
     implementation(libs.constraintlayout)
     
-    // Koin для DI
     implementation(libs.koin.android)
 }
-
-
