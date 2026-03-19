@@ -1,47 +1,59 @@
 package com.example.effectivemobiletestproject
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.effectivemobiletestproject.ui.theme.EffectiveMobileTestProjectTheme
-// comment for commit test
-class MainActivity : ComponentActivity() {
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
+import com.example.effectivemobiletestproject.databinding.ActivityHostBinding
+import com.example.effectivemobiletestproject.feature.auth.LoginFragment
+import com.example.effectivemobiletestproject.feature.home.HomeFragment
+
+class MainActivity : AppCompatActivity(),
+    LoginFragment.OnLoginSuccessListener,
+    HomeFragment.OnNavigateToCourseListener {
+
+    private lateinit var binding: ActivityHostBinding
+    private lateinit var navController: androidx.navigation.NavController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            EffectiveMobileTestProjectTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+        binding = ActivityHostBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.navController
+
+        binding.bottomBar.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            binding.bottomBar.visibility = when (destination.id) {
+                R.id.loginFragment -> android.view.View.GONE
+                else -> android.view.View.VISIBLE
             }
         }
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+    override fun onLoginSuccess() {
+        navController.navigate(R.id.homeFragment)
+    }
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    EffectiveMobileTestProjectTheme {
-        Greeting("Android")
+    override fun onCourseSelected(
+        courseId: Int,
+        title: String,
+        description: String,
+        price: String,
+        rate: String,
+        startDate: String
+    ) {
+        val args = Bundle().apply {
+            putInt("courseId", courseId)
+            putString("title", title)
+            putString("description", description)
+            putString("price", price)
+            putString("rate", rate)
+            putString("startDate", startDate)
+        }
+        navController.navigate(R.id.courseFragment, args)
     }
 }

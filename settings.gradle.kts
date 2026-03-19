@@ -21,3 +21,11 @@ dependencyResolutionManagement {
 
 rootProject.name = "EffectiveMobileTestProject"
 include(":app")
+include(":core:network")
+include(":core:ui")
+include(":core:data")
+include(":feature:auth")
+include(":feature:home")
+include(":feature:course")
+include(":feature:favorites")
+include(":feature:account")

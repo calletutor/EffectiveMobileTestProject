@@ -1,0 +1,101 @@
+package com.example.effectivemobiletestproject.feature.auth
+
+import android.content.Intent
+import android.net.Uri
+import android.os.Bundle
+import android.text.Editable
+import android.text.InputFilter
+import android.text.Spanned
+import android.text.TextWatcher
+import android.widget.Button
+import android.widget.EditText
+import androidx.activity.ComponentActivity
+
+class LoginActivity : ComponentActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_login)
+
+        val emailEditText = findViewById<EditText>(R.id.etEmail)
+        val passwordEditText = findViewById<EditText>(R.id.etPassword)
+        val loginButton = findViewById<Button>(R.id.btnLogin)
+        val leftButton = findViewById<Button>(R.id.btnLeft)
+        val rightButton = findViewById<Button>(R.id.btnRight)
+
+        val emailFilter = object : InputFilter {
+            private val allowedRegex = Regex("[a-zA-Z0-9@._\\-]+")
+
+            override fun filter(
+                source: CharSequence,
+                start: Int,
+                end: Int,
+                dest: Spanned,
+                dstart: Int,
+                dend: Int
+            ): CharSequence? {
+                val newText = source.subSequence(start, end)
+                return if (newText.isEmpty()) {
+                    null
+                } else if (allowedRegex.matches(newText)) {
+                    null
+                } else {
+                    ""
+                }
+            }
+        }
+
+        emailEditText.filters = arrayOf(emailFilter)
+
+        val emailPattern =
+            Regex("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")
+
+        fun updateLoginButtonState() {
+            val email = emailEditText.text.toString().trim()
+            val password = passwordEditText.text.toString()
+
+            val isValidEmail = emailPattern.matches(email)
+            val isPasswordFilled = password.isNotEmpty()
+
+            loginButton.isEnabled = isValidEmail && isPasswordFilled
+        }
+
+        loginButton.isEnabled = false
+
+        val watcher = object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                updateLoginButtonState()
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        }
+
+        emailEditText.addTextChangedListener(watcher)
+        passwordEditText.addTextChangedListener(watcher)
+
+        updateLoginButtonState()
+
+        loginButton.setOnClickListener {
+            val email = emailEditText.text.toString().trim()
+            val password = passwordEditText.text.toString()
+
+            val intent = Intent().setClassName(this, "com.example.effectivemobiletestproject.feature.home.MainActivity")
+            startActivity(intent)
+            finish()
+        }
+
+        leftButton.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://vk.com/"))
+            startActivity(intent)
+        }
+
+        rightButton.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://ok.ru/"))
+            startActivity(intent)
+        }
+    }
+}
+
+
